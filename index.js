@@ -1,8 +1,7 @@
-document.getElementById("myH1").innerHTML = "Hi!";
+//document.getElementById("myH1").innerHTML = "Hi!";
 
-$("#myH1").html("Hi Jquery! ");
-console.log($(".hiYou").html("Hi You"));
-
+//$("#myH1").html("Hi Jquery! ");
+//console.log($(".hiYou").html("Hi You"));
 
 ///BASIC AJAX
 
@@ -30,3 +29,99 @@ $.ajax({
             console.log("JQUERY: ");
             console.log(msg);
         });
+
+///json
+
+document.getElementById("loadbutton").addEventListener("click", ajaxcall);
+
+function ajaxcall(){
+   
+    var ajax = new XMLHttpRequest();
+    ajax.open("GET", "https://assets.breatheco.de/json/project_list.php", true);
+    ajax.addEventListener("load", ajaxArrives);
+    ajax.send();
+    
+
+}
+
+function ajaxArrives(event){
+    
+    var cardContent ='<div class="card" style="width: 20rem;">' +
+          '<img class="card-img-top" src="%img%" alt="Card image cap">' +
+          '<div class="card-body">'+
+            '<h4 class="card-title">%title%</h4>'+
+            '<p class="card-text">%desc%</p>'+
+          '</div>'+
+        '</div>';
+    
+         
+    
+    var jsonObj = JSON.parse(event.target.response);
+       
+      var text ="";
+      var wholeContent = "";
+        
+        for (var i = 0 ; i <jsonObj.length; i++) {
+            
+            text = cardContent.replace("%img%", jsonObj[i].thumb);
+            text = text.replace("%title%", jsonObj[i].name);
+            text = text.replace("%desc%", jsonObj[i].description);
+            wholeContent += text;
+           
+            
+        }
+    
+    
+ 
+  document.getElementById("wholeContent").innerHTML=wholeContent;
+  
+}
+
+
+//jquery conversion
+
+document.getElementById("loadbutton").addEventListener("click", ajaxcall);
+
+function ajaxcall(){
+   
+    var ajax = new XMLHttpRequest();
+    ajax.open("GET", "https://assets.breatheco.de/json/project_list.php", true);
+    ajax.addEventListener("load", ajaxArrives);
+    ajax.send();
+    
+
+}
+
+function ajaxArrives(event){
+    
+    var cardContent ='<div class="card" style="width: 20rem;">' +
+          '<img class="card-img-top" src="%img%" alt="Card image cap">' +
+          '<div class="card-body">'+
+            '<h4 class="card-title">%title%</h4>'+
+            '<p class="card-text">%desc%</p>'+
+          '</div>'+
+        '</div>';
+    
+         
+    
+    var jsonObj = JSON.parse(event.target.response);
+       
+      var text ="";
+      var wholeContent = "";
+        
+        for (var i = 0 ; i <jsonObj.length; i++) {
+            
+            text = cardContent.replace("%img%", jsonObj[i].thumb);
+            text = text.replace("%title%", jsonObj[i].name);
+            text = text.replace("%desc%", jsonObj[i].description);
+            wholeContent += text;
+           
+            
+        }
+    
+    
+ 
+  document.getElementById("wholeContent").innerHTML=wholeContent;
+  
+}
+
